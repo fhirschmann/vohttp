@@ -58,7 +58,12 @@ function vohttp.Server:_request_received(con, request)
     local response
 
     if self._routes[request.path] then
-        response = self._routes[request.path](request)
+        local status
+        status, response = pcall(self._routes[request.path], request)
+        if not status then
+            response = response.."\n"..debug.traceback()
+            response = vohttp.response.InternalServerErrorResponse:new(response)
+        end
     else
         response = vohttp.response.NotFoundResponse:new()
     end

@@ -11,6 +11,7 @@ vohttp.response = {}
 vohttp.response.Response = {}
 vohttp.response.GenericResponse = {}
 vohttp.response.NotFoundResponse = {}
+vohttp.response.InternalServerErrorResponse = {}
 
 --- Creates a new empty HTTP Response Object (with default values).
 -- @param request table of lines received via HTTP
@@ -69,4 +70,11 @@ end
 function vohttp.response.NotFoundResponse:new()
     return vohttp.response.GenericResponse:new(404, "Not Found",
         "<html><body><h1>Not found</h1>The requested page was not found on this server.")
+end
+
+--- Constructs a new 500 (Internal Server Error) Response
+-- @param msg the error message
+function vohttp.response.InternalServerErrorResponse:new(msg)
+    return vohttp.response.GenericResponse:new(500, "Internal Server Error",
+        "<html><body><h1>Internal Server Error</h1><pre>."..msg.."</pre></body></html>")
 end
