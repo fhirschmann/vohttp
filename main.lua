@@ -8,8 +8,7 @@ dofile("server.lua")
 
 local function serve(req)
     local r = vohttp.response.Response:new()
-    r.headers["Content-Type"] = "text/plain"
-    r.body = "You said: "..req.get_data["say"]
+    r.body = "<html><head><h1>Hello</h1>Hi there.</head></html>"
     return r
 end
 
