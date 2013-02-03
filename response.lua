@@ -69,7 +69,7 @@ end
 --- Constructs a 404 (Not Found) Response
 function vohttp.response.NotFoundResponse:new()
     return vohttp.response.GenericResponse:new(404, "Not Found",
-        "<html><body><h1>Not found</h1>The requested page was not found on this server.")
+        "<html><body><h1>Not found</h1>The requested page was not found on this server.</body></html>")
 end
 
 --- Constructs a new 500 (Internal Server Error) Response
