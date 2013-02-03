@@ -1,0 +1,6 @@
+project='vohttp'
+title='vohttp documentation'
+description='HTTP utilities for Vendetta Online'
+dir='doc'
+readme='README.md'
+format='discount'
