@@ -15,6 +15,7 @@ function vohttp.Server:new()
     self._socket = nil
     self._routes = {}
     self._buffer = {}
+    self.listening = false
 
     return self
 end
@@ -82,7 +83,7 @@ end
 --- Starts listening for requests.
 -- @param port the port to listen to
 function vohttp.Server:start(port)
-    if self._socket then
+    if self.listening then
         print("ERROR: Socket already open.")
     else
         self._socket = TCP.make_server(port,
@@ -98,14 +99,15 @@ function vohttp.Server:start(port)
                             self:_connection_lost(con)
                         end)
         print("OK: Now listening on port "..port)
+        self.listening = true
     end
 end
 
 -- Stops listening for requests.
 function vohttp.Server:stop()
-    if self and self._socket then
+    if self and self.listening then
         self._socket:Disconnect()
-        self._socket = nil
+        self.listening = false
     else
         print("Error: Server is not listening.")
     end
