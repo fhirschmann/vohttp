@@ -29,7 +29,7 @@ local function SetupLineInputHandlers(conn, conn_handler, line_handler, disconn_
     repeat
     if in_body then
         if buf:len() == wait_for then
-            buf = buf.."\n\r\n"
+            buf = buf.."\r\n\r\n"
         end
     end
       buf,match = string.gsub(buf, "^([^\n]*)\n", function(line)
