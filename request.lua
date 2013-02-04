@@ -41,7 +41,6 @@ end
 --- Contructs an already initialized Request from a query with a client
 -- @param query the query with the client (a table of lines)
 function vohttp.request.Request:load_query(query)
-    printtable(query)
     self.command, self.path, self.version = query[1]:match("(.*) (.*) HTTP/(.*)")
 
     if self.path:find("%?") then
