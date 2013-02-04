@@ -41,6 +41,7 @@ end
 --- Contructs an already initialized Request from a query with a client
 -- @param query the query with the client (a table of lines)
 function vohttp.request.Request:load_query(query)
+    printtable(query)
     self.command, self.path, self.version = query[1]:match("(.*) (.*) HTTP/(.*)")
 
     if self.path:find("%?") then
@@ -58,7 +59,11 @@ function vohttp.request.Request:load_query(query)
     end
 
     if self.command == "POST" then
-        self.post_data = vohttp.util.decode(query[table.getn(query)])
+        if self.headers["Content-Type"] == "application/x-www-form-urlencoded" then
+            self.post_data = vohttp.util.decode(query[table.getn(query)])
+        else
+            self.post_data = query[table.getn(query)]
+        end
     end
 
     return self
