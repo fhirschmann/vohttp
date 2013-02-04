@@ -42,6 +42,11 @@ function vohttp.response.Response:construct()
                                       self.status_message}, " "))
 
     for k, v in pairs(self.headers) do
+        if v == "Content-Type" then
+            if not v:match("charset") then
+                v = v.."; charset=iso-8859-1"
+            end
+        end
         table.insert(lines, k..": "..v)
     end
 
