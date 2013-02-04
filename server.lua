@@ -33,7 +33,7 @@ end
 --- Called when a new connection is made (internal function).
 -- @param con the connection context
 function vohttp.Server:_connection_made(con)
-    print("Connection from "..con.tcp:GetPeerName())
+    --print("Connection from "..con.tcp:GetPeerName())
     self._buffer[con.tcp:GetPeerName()] = {}
     self.connections[con] = true
 end
