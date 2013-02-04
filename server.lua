@@ -15,6 +15,7 @@ function vohttp.Server:new()
     self._socket = nil
     self._routes = {}
     self._buffer = {}
+    self.connections = {}
     self.listening = false
 
     return self
@@ -34,6 +35,7 @@ end
 function vohttp.Server:_connection_made(con)
     print("Connection from "..con.tcp:GetPeerName())
     self._buffer[con.tcp:GetPeerName()] = {}
+    self.connections[con] = true
 end
 
 --- Called when a new line is received (internal function).
@@ -77,7 +79,7 @@ end
 --- Called when a connection is lost (internal function).
 -- @param con the connection context
 function vohttp.Server:_connection_lost(con)
-    print("Lost connection")
+    self.connections[con] = nil
 end
 
 --- Starts listening for requests.
@@ -106,6 +108,10 @@ end
 -- Stops listening for requests.
 function vohttp.Server:stop()
     if self and self.listening then
+        for k, v in ipairs(self.connections) do
+            k:Disconnect()
+            self.connections[k] = nil
+        end
         self._socket:Disconnect()
         self.listening = false
     else
