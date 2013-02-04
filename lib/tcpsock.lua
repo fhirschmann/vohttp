@@ -1,11 +1,18 @@
 -- written by Andy
-declare("TCP", TCP or {})
+
+-- hacked for http use (post data does not send CRLF)
+-- "\n\r\n" is now appended when all data has been received
+-- that was requested by Content-Length
+
+local TCP = {}
 
 
 local function SetupLineInputHandlers(conn, conn_handler, line_handler, disconn_handler)
   local buf = ''
   local match
   local connected
+  local wait_for = nil
+  local in_body = false
 
   conn.tcp:SetReadHandler(function()
     local msg, errcode = conn.tcp:Recv()
@@ -20,14 +27,25 @@ local function SetupLineInputHandlers(conn, conn_handler, line_handler, disconn_
     end
     buf = buf..msg
     repeat
+    if in_body then
+        if buf:len() == wait_for then
+            buf = buf.."\n\r\n"
+        end
+    end
       buf,match = string.gsub(buf, "^([^\n]*)\n", function(line)
+        if line:find("^Content%-Length") then
+            wait_for = tonumber(line:match("Content%-Length: (%d+)"))
+        elseif line == "\r" then
+            in_body = true
+        end
         local result, err_msg = pcall(line_handler, conn, line)
         if not result then
             console_print(err_msg)
+            console_print(debug.traceback())
         end
         return ''
       end)
-    until match==0
+    until (match==0)
   end)
 
   local writeq = {}
@@ -123,3 +141,5 @@ function TCP.make_server(port, conn_handler, line_handler, disconn_handler)
 
   return conn
 end
+
+return TCP

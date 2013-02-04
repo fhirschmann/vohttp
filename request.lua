@@ -31,6 +31,9 @@ function vohttp.request.Request:new(con)
     --- the GET data sent by the client
     self.get_data = nil
 
+    -- the POST data sent by the client
+    self.post_data = nil
+
     return self
 end
 
@@ -38,6 +41,7 @@ end
 --- Contructs an already initialized Request from a query with a client
 -- @param query the query with the client (a table of lines)
 function vohttp.request.Request:load_query(query)
+    printtable(query)
     self.command, self.path, self.version = query[1]:match("(.*) (.*) HTTP/(.*)")
 
     if self.path:find("%?") then
@@ -48,8 +52,14 @@ function vohttp.request.Request:load_query(query)
     for n, h in ipairs(query) do
         if n ~= 1 then
             local name, value = h:match("(.*): (.*)")
-            self.headers[name] = value
+            if name then
+                self.headers[name] = value
+            end
         end
+    end
+
+    if self.command == "POST" then
+        self.post_data = vohttp.util.decode(query[table.getn(query)])
     end
 
     return self

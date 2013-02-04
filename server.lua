@@ -7,6 +7,8 @@
 -- @copyright 2013
 -- @license MIT/X11
 
+local TCP = dofile("lib/tcpsock.lua")
+
 vohttp.Server = {}
 
 --- Creates a new Server instance.
@@ -36,21 +38,38 @@ function vohttp.Server:_connection_made(con)
     --print("Connection from "..con.tcp:GetPeerName())
     self._buffer[con.tcp:GetPeerName()] = {}
     self.connections[con] = true
+
+    -- waiting for POST data
+    self._wait_for = {}
 end
 
 --- Called when a new line is received (internal function).
 -- @param con the connection context
 -- @param line the line that was received
 function vohttp.Server:_line_received(con, line)
+    local ready = false
+
     if line == "\r" then
         -- Andy's tcpsock strips off the \n in \r\n
 
-        local request = vohttp.request.Request:new(con)
-        request:load_query(self._buffer[con.tcp:GetPeerName()])
-        self:_request_received(con, request)
+        if self._wait_for[con.tcp:GetPeerName()] then
+            self._wait_for[con.tcp:GetPeerName()] = false
+        else
+            ready = true
+        end
+
     else
         table.insert(self._buffer[con.tcp:GetPeerName()],
                      line:sub(0, line:len() - 1))
+        if line:find("^Content%-Length") then
+            self._wait_for[con.tcp:GetPeerName()] = true
+        end
+    end
+
+    if ready then
+        local request = vohttp.request.Request:new(con)
+        request:load_query(self._buffer[con.tcp:GetPeerName()])
+        self:_request_received(con, request)
     end
 end
 
