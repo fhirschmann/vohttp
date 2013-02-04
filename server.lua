@@ -84,6 +84,7 @@ function vohttp.Server:_request_received(con, request)
         status, response = pcall(self._routes[request.path], request)
         if not status then
             response = response.."\n"..debug.traceback()
+            log_print(response)
             response = vohttp.response.InternalServerErrorResponse:new(response)
         end
     else
