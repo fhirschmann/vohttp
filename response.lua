@@ -25,6 +25,9 @@ function vohttp.response.Response:new()
     --- the http version (defaults to "1.0" and should not be changed)
     self.version = "1.0"
 
+    -- disconnect after serving this response
+    self.disconnect = true
+
     --- any additional headers such as content-type
     self.headers = {}
     self.headers["Content-Type"] = "text/html"

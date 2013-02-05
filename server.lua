@@ -94,6 +94,10 @@ function vohttp.Server:_request_received(con, request)
     for _, line in ipairs(response:construct()) do
         con:Send(line.."\n")
     end
+
+    if response.disconnect then
+        con.tcp:Disconnect()
+    end
 end
 
 --- Called when a connection is lost (internal function).
