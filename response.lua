@@ -28,6 +28,7 @@ function vohttp.response.Response:new()
     --- any additional headers such as content-type
     self.headers = {}
     self.headers["Content-Type"] = "text/html"
+    self.headers["Connection"] = "close"
 
     --- the response body (the content)
     self.body = ""
