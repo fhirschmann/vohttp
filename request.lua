@@ -29,10 +29,10 @@ function vohttp.request.Request:new(con)
     self.version = nil
 
     --- the GET data sent by the client
-    self.get_data = nil
+    self.get_data = {}
 
     -- the POST data sent by the client
-    self.post_data = nil
+    self.post_data = {}
 
     return self
 end
