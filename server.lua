@@ -7,8 +7,6 @@
 -- @copyright 2013
 -- @license MIT/X11
 
-local TCP = dofile("lib/tcpsock.lua")
-
 vohttp.Server = {}
 
 --- Creates a new Server instance.

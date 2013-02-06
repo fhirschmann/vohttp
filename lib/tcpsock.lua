@@ -141,5 +141,3 @@ function TCP.make_server(port, conn_handler, line_handler, disconn_handler)
 
   return conn
 end
-
-return TCP
