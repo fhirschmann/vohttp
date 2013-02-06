@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-volupack - Packs multiple Lua for Venetta Online into a single file.
+volupack - Packs multiple Lua files for Venetta Online into a single file.
 
 Given the following layout:
 
