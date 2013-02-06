@@ -2,11 +2,42 @@
 vohttp is an HTTP library for [Vendetta Online](http://vendetta-online.com)
 that includes an HTTP server.
 
+## Installation
+
+Because I found the current way of distributing 3rd party
+libraries for Vendetta Online unsatisfying (multiple plugins loading different
+versions of the same library into the global namespace), installation
+of this library works a little different.
+
+First, you'll have to pull the repository from github:
+
+    git clone http://github.com/fhirschmann/vohttp.git
+
+Afterwards, you have to pack all of the libraries files' into
+a single file. You can do so by executing:
+
+    cd vohttp
+    make
+
+You will now find a packed version of the library in the `out`
+directory. You can simply distribute and load this file now
+like so:
+
+    local vohttp = dofile("vohttp_packed.lua")
+
+If you intend to use vohttp in several files, I recommend to do
+the followin in your main.lua:
+
+    mylib = {}
+    mylib.http = dofile("vohttp_packed.lua")
+
 ## Usage
 
 The following snippet will start listening on port
 9000 and dispatch all requests to `/` to the function
 `serve`:
+
+    local vohttp = dofile("vohttp_packed.lua")
 
     local function serve(req)
         local r = vohttp.response.Response:new()
@@ -19,6 +50,8 @@ The following snippet will start listening on port
     server.start(9000)
 
 Of course, you can also access GET data:
+
+    local vohttp = dofile("vohttp_packed.lua")
 
     local function serve(req)
         local r = vohttp.response.Response:new()
