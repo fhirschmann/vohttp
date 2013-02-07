@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+"""
+volucapsulate - Encapsulates static files in LUA in order to be used
+                within the vohttp framework.
+
+.. moduleauthor:: Fabian Hirschmann <fabian@hirschm.net>
+"""
+from __future__ import print_function
+import os
+import argparse
+
+
+def encapsulate(input_filename, output_filename):
+    with open(output_filename, "w") as newfile:
+        with open(input_filename) as oldfile:
+            newfile.write("return [[" + os.linesep)
+            for line in oldfile.readlines():
+                if "[[" in line:
+                    line = line.replace("[[", "[ [")
+                    print("WARNING: Replaces [[ with [ [ in %s" % input_filename)
+                newfile.write(line)
+            newfile.write("]]" + os.linesep)
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=os.linesep.join(__doc__.split("\n")[:-2]),
+                                     formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument("path", type=str, help="file or directory to encapsulate")
+    args = parser.parse_args()
+
+    if os.path.isfile(args.path):
+        encapsulate(args.path, args.path + ".lua")
+    else:
+        for root, dirnames, filenames in os.walk(args.path):
+            for filename in filenames:
+                if filename.endswith(".lua"):
+                    continue
+                filepath = os.path.join(root, filename)
+                encapsulate(filepath, filepath + ".lua")

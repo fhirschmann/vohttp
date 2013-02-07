@@ -94,7 +94,7 @@ This library also ships with a tool named `tools/encapsulate`
 that scans for files in a given directory and creates an
 encapsulated file for each file found:
 
-    tools/encapsulate media/js
+    tools/volucapsulate media/js
 
 
 #### Serving Encapsulates Files
