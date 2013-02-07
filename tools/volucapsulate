@@ -17,7 +17,7 @@ def encapsulate(input_filename, output_filename):
             for line in oldfile.readlines():
                 if "[[" in line:
                     line = line.replace("[[", "[ [")
-                    print("WARNING: Replaces [[ with [ [ in %s" % input_filename)
+                    print("WARNING: Replaced [[ with [ [ in %s" % input_filename)
                 newfile.write(line)
             newfile.write("]]" + os.linesep)
 
