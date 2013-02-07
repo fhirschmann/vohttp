@@ -4,6 +4,12 @@ that includes an HTTP server.
 
 ## Installation
 
+### Downloading a prepacked version
+
+You can fetch the current prepacked version of this library from
+[this site](http://vohttp.0x0b.de/experimental/out/vohttp_packed.lua).
+
+### Packing from the repository
 Because I found the current way of distributing 3rd party
 libraries for Vendetta Online unsatisfying (multiple plugins loading different
 versions of the same library into the global namespace), installation
@@ -25,8 +31,8 @@ like so:
 
     local vohttp = dofile("vohttp_packed.lua")
 
-If you intend to use vohttp in several files, I recommend to do
-the followin in your main.lua:
+If you intend to use vohttp in several files in your plug-in, I recommend
+to do the following in your main.lua:
 
     mylib = {}
     mylib.http = dofile("vohttp_packed.lua")
@@ -65,6 +71,38 @@ Of course, you can also access GET data:
     server.start(9000)
 
 and point your browser to [http://localhost:9000/?say=hello](http://localhost:9000/?say=hello)
+
+### Static Files
+This library provides a dispatcher that can be used to serve
+static files (such as CSS and JavaScript). If you wish to
+do so, please follow the next two steps.
+
+#### Encapsulating Static Files
+Because you can only read from Lua files in Vendetta Online,
+you need to encapsulate your static content in such a Lua file.
+
+In order to do so yourself, simply create a file named
+`style.css.lua` with the following content:
+
+    return [[[
+    body {
+        color: #000;
+    }
+    ]]]
+
+This library also ships with a tool named `tools/encapsulate`
+that scans for files in a given directory and creates an
+encapsulated file for each file found:
+
+    tools/encapsulate media/js
+
+
+#### Serving Encapsulates Files
+    server:add_route("/style.css",
+                     http.dispatch.StaticFile:new("media/css/style.css.lua")
+
+Please note that you need to reload Vendetta Online's
+Interface when you change your static files.
 
 ## Documentation
 Please [find the documentation](http://fhirschmann.github.com/vohttp) here
