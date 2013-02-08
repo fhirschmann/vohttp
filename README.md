@@ -19,15 +19,15 @@ First, you'll have to pull the repository from github:
 
     git clone http://github.com/fhirschmann/vohttp.git
 
-Afterwards, you have to pack all of the libraries files' into
+Afterwards, you have to pack all of the librarie's files into
 a single file. You can do so by executing:
 
     cd vohttp
     make
 
-You will now find a packed version of the library in the `out`
-directory. You can simply distribute and load this file now
-like so:
+You can now find a packed version of the library in the `out`
+directory. You can distribute this file with your plugin
+and load it like so:
 
     local vohttp = dofile("vohttp_packed.lua")
 
@@ -41,7 +41,7 @@ to do the following in your main.lua:
 
 The following snippet will start listening on port
 9000 and dispatch all requests to `/` to the function
-`serve`:
+`serve`
 
     local vohttp = dofile("vohttp_packed.lua")
 
