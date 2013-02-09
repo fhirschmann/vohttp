@@ -16,27 +16,32 @@ vohttp.response.InternalServerErrorResponse = {}
 --- Creates a new empty HTTP Response Object (with default values).
 -- @param request table of lines received via HTTP
 function vohttp.response.Response:new()
+    local new = {}
+    for k, v in pairs(vohttp.response.Response) do
+        new[k] = v
+    end
+
     --- the status code (defaults to 200)
-    self.status_code = 200
+    new.status_code = 200
 
     --- the status message (defaults to "OK")
-    self.status_message = "OK"
+    new.status_message = "OK"
 
     --- the http version (defaults to "1.0" and should not be changed)
-    self.version = "1.0"
+    new.version = "1.0"
 
     -- disconnect after serving this response
-    self.disconnect = true
+    new.disconnect = true
 
     --- any additional headers such as content-type
-    self.headers = {}
-    self.headers["Content-Type"] = "text/html"
-    self.headers["Connection"] = "close"
+    new.headers = {}
+    new.headers["Content-Type"] = "text/html"
+    new.headers["Connection"] = "close"
 
     --- the response body (the content)
-    self.body = ""
+    new.body = ""
 
-    return self
+    return new
 end
 
 --- Constructs a Response string ready to be served

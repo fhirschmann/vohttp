@@ -12,13 +12,18 @@ vohttp.Server = {}
 --- Creates a new Server instance.
 -- @return a new Server instance
 function vohttp.Server:new()
-    self._socket = nil
-    self._routes = {}
-    self._buffer = {}
-    self.connections = {}
-    self.listening = false
+    local new = {}
+    for k, v in pairs(vohttp.Server) do
+        new[k] = v
+    end
 
-    return self
+    new._socket = nil
+    new._routes = {}
+    new._buffer = {}
+    new.connections = {}
+    new.listening = false
+
+    return new
 end
 
 --- Adds a new route dispatcher to this VOServe instance.

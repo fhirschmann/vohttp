@@ -13,28 +13,33 @@ vohttp.request.Request = {}
 --- Creates a new empty HTTP Request Object.
 -- @param con the connection context
 function vohttp.request.Request:new(con)
+    local new = {}
+    for k, v in pairs(vohttp.request.Request) do
+        new[k] = v
+    end
+
     --- the command set by the client
-    self.command = nil
+    new.command = nil
 
     --- the connection context
-    self.con = con
+    new.con = con
 
     --- the requested path
-    self.path = nil
+    new.path = nil
 
     --- the headers the clients sent
-    self.headers = {}
+    new.headers = {}
 
     --- the HTTP version used by the client
-    self.version = nil
+    new.version = nil
 
     --- the GET data sent by the client
-    self.get_data = {}
+    new.get_data = {}
 
     -- the POST data sent by the client
-    self.post_data = {}
+    new.post_data = {}
 
-    return self
+    return new
 end
 
 
