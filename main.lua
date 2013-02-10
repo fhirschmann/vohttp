@@ -1,3 +1,12 @@
+---------------
+-- ## vohttp - an http library for Vendetta Online
+--
+-- [Github Page](https://github.com/fhirschmann/vohttp)
+--
+-- @author Fabian Hirschmann <fabian@hirschm.net>
+-- @copyright 2013
+-- @license MIT/X11
+
 declare("vohttp", vohttp or {})
 
 vohttp.DEBUG = gkini.ReadString("vohttp", "debug", 0) == 1

@@ -11,7 +11,7 @@ vohttp.dispatch = {}
 vohttp.dispatch.StaticPage = {}
 vohttp.dispatch.StaticFile = {}
 
---- Creates a dispatcher that serves a static page
+--- Creates a dispatcher that serves a static page.
 -- @param path to the file to serve
 -- @param the content type
 function vohttp.dispatch.StaticPage:new(body, content_type)
@@ -26,7 +26,7 @@ function vohttp.dispatch.StaticPage:new(body, content_type)
     end
 end
 
---- Creates a dispatcher that serves a static file
+--- Creates a dispatcher that serves a static file.
 -- @param path the path to the file to serve
 -- @param the content type
 function vohttp.dispatch.StaticFile:new(path, content_type)

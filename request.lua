@@ -18,32 +18,32 @@ function vohttp.request.Request:new(con)
         new[k] = v
     end
 
-    --- the command set by the client
+    --- the command set by the client (GET, POST, HEAD).
     new.command = nil
 
-    --- the connection context
+    --- the connection context.
     new.con = con
 
-    --- the requested path
+    --- the requested path.
     new.path = nil
 
-    --- the headers the clients sent
+    --- the headers the clients sent.
     new.headers = {}
 
-    --- the HTTP version used by the client
+    --- the HTTP version used by the client.
     new.version = nil
 
-    --- the GET data sent by the client
+    --- the GET data sent by the client.
     new.get_data = {}
 
-    -- the POST data sent by the client
+    -- the POST data sent by the client.
     new.post_data = {}
 
     return new
 end
 
 
---- Contructs an already initialized Request from a query with a client
+--- Contructs an already initialized Request from a query with a client.
 -- @param query the query with the client (a table of lines)
 function vohttp.request.Request:load_query(query)
     self.command, self.path, self.version = query[1]:match("(.*) (.*) HTTP/(.*)")
