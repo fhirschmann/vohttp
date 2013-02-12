@@ -128,7 +128,6 @@ function vohttp.Server:start(port)
                         function(con)
                             self:_connection_lost(con)
                         end)
-        print("OK: Now listening on port "..port)
         self.listening = true
     end
 end
