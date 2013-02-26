@@ -9,7 +9,10 @@
 
 declare("vohttp", vohttp or {})
 
-vohttp.DEBUG = gkini.ReadString("vohttp", "debug", 0) == 1
+vohttp = {
+    DEBUG=gkini.ReadString("vohttp", "debug", 0) == 1
+    VERSION="experimental"
+}
 
 function vohttp.debug_print(msg)
     if vohttp.DEBUG then
