@@ -72,16 +72,15 @@ def walk(output, path, ns):
                 else:
                     # replace: ns = ...
                     match = re.match("%s\s=\s(.+)" % ns, line)
-                    if match:
-                        print(line)
 
                 if match:
+                    value = match.group(1)
                     print("WARNING: Replaced global declare in %s:%s" % (
                         path, lineno))
                     print("< %s" % line.strip())
                     newline = "local %s = %s" % (ns, "{}" if "or {}" in value else value)
                     print("> %s" % newline)
-                    output.write(newline)
+                    output.write(newline + os.linesep)
                 else:
                     output.write(line)
             lineno += 1
