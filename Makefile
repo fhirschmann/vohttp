@@ -8,11 +8,18 @@ out/vohttp_packed.lua: response.lua server.lua dispatch.lua request.lua main.lua
 
 release: out/vohttp_packed.lua
 	rm -rf _release
-	mkdir _release
-	cp out/vohttp_packed.lua _release/vohttpd_packed-$(VERSION).lua
+	mkdir -p _release/vohttp-$(VERSION)
+	cp out/vohttp_packed.lua _release/vohttp-$(VERSION)/vohttp_packed.lua
+	git checkout-index -f -a --prefix=_release/vohttp/
+	cd _release/vohttp && ldoc .
+	mv _release/vohttp/doc _release/vohttp-$(VERSION)/
+	rm -rf _release/vohttp
+	cd _release && zip -r vohttp-$(VERSION).zip vohttp-$(VERSION)
+	cd _release && tar cvzf vohttp-$(VERSION).tar.gz vohttp-$(VERSION)
 
 release-upload: release
-	scp _release/vohttpd_packed-$(VERSION).lua 0x0b.de:/var/www/vohttp.0x0b.de/htdocs/releases
+	ssh 0x0b.de mkdir -p /var/www/vohttp.0x0b.de/htdocs/releases/
+	rsync -avz --delete -e ssh _release/* srv:/var/www/vohttp.0x0b.de/htdocs/releases/
 
 clean:
 	rm -r out
