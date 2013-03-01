@@ -105,5 +105,5 @@ Please note that you need to reload Vendetta Online's
 Interface when you change your static files.
 
 ## Documentation
-Please [find the documentation](http://fhirschmann.github.com/vohttp) here
+Please [find the documentation](http://vohttp.0x0b.de/releases/vohttp-current/) here
 at Github.
