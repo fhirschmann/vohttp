@@ -14,7 +14,6 @@ vohttp.response.NotFoundResponse = {}
 vohttp.response.InternalServerErrorResponse = {}
 
 --- Creates a new empty HTTP Response Object (with default values).
--- @param request table of lines received via HTTP
 function vohttp.response.Response:new()
     local new = {}
     for k, v in pairs(vohttp.response.Response) do

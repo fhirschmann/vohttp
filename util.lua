@@ -12,7 +12,6 @@ vohttp.util = {}
 --- Escapes a string for transmittion over the HTTP protocol.
 -- @param s the string to escape
 -- @return an escaped string
--- @see vohttp.util.unescape
 function vohttp.util.escape(s)
     local s = string.gsub(s, "([&=+%c])", function(c)
         return string.format("%%%02X", string.byte(c))
@@ -24,7 +23,6 @@ end
 --- Unescapes a previously escaped string.
 -- @param s the string to unescape
 -- @return an unescaped string
--- @see vottp.util.escape
 function vohttp.util.unescape(s)
     local s = string.gsub(s, "+", " ")
     s = string.gsub(s, "%%(%x%x)", function(h)
@@ -49,7 +47,6 @@ end
 --- Encodes a table of key/values for transmittion over the HTTP protocol.
 -- @param t the table to encode
 -- @return a string-encoded key-value table
--- @see vohttp.util.decode
 function vohttp.util.encode(t)
     local s = ""
     for k,v in pairs(t) do
