@@ -1,5 +1,5 @@
 ---------------
--- ## Generic dispatcher
+-- ## Generic dispatcher.
 --
 -- [Github Page](https://github.com/fhirschmann/vohttp)
 --
