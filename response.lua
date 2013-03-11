@@ -68,7 +68,7 @@ end
 
 --- A shorthand for generating simple responses (i.e., 404)
 -- @param status_code the HTTP status code
--- @param status_msg the status message for the given status code
+-- @param status_message the status message for the given status code
 -- @param body the body of the response (the content)
 function vohttp.response.GenericResponse:new(status_code, status_message, body)
     local response = vohttp.response.Response:new()
