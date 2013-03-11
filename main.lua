@@ -11,7 +11,7 @@ declare("vohttp", vohttp or {})
 
 vohttp = {
     DEBUG=gkini.ReadString("vohttp", "debug", 0) == 1
-    VERSION="experimental"
+    VERSION="0.5"
 }
 
 function vohttp.debug_print(msg)
