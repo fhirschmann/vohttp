@@ -1,5 +1,5 @@
 ---------------
--- ## vohttp - an http library for Vendetta Online
+-- ## vohttp - an http library for Vendetta Online.
 --
 -- [Github Page](https://github.com/fhirschmann/vohttp)
 --
