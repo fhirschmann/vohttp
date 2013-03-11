@@ -19,7 +19,7 @@ First, you'll have to pull the repository from github:
 
     git clone http://github.com/fhirschmann/vohttp.git
 
-Afterwards, you have to pack all of the librarie's files into
+Afterwards, you have to pack all of the library's files into
 a single file. You can do so by executing:
 
     cd vohttp
