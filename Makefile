@@ -15,7 +15,9 @@ release: out/vohttp_packed.lua
 	mv _release/vohttp/doc _release/vohttp-$(VERSION)/
 	rm -rf _release/vohttp
 	cd _release && zip -r vohttp-$(VERSION).zip vohttp-$(VERSION)
+	cd _release && gpg --armor --detach-sign vohttp-$(VERSION).zip
 	cd _release && tar cvzf vohttp-$(VERSION).tar.gz vohttp-$(VERSION)
+	cd _release && gpg --armor --detach-sign vohttp-$(VERSION).tar.gz
 
 release-upload: release
 	ssh 0x0b.de mkdir -p /var/www/vohttp.0x0b.de/htdocs/releases/
