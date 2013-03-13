@@ -21,7 +21,7 @@ release: out/vohttp_packed.lua
 
 release-upload: release
 	ssh 0x0b.de mkdir -p /var/www/vohttp.0x0b.de/htdocs/releases/
-	rsync -avz --delete -e ssh _release/* srv:/var/www/vohttp.0x0b.de/htdocs/releases/
+	rsync -avz --delete -e ssh _release/* srv:/var/www/dl.0x0b.de/htdocs/vohttp/
 
 clean:
 	rm -r out
