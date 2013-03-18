@@ -7,7 +7,7 @@ that includes an HTTP server.
 ### Downloading a prepacked version
 
 You can fetch the current prepacked version of this library from
-[this site](http://vohttp.0x0b.de/releases/).
+[this site](http://dl.0x0b.de/vohttp/).
 
 ### Packing from the repository
 Because I found the current way of distributing 3rd party
