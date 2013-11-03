@@ -97,7 +97,7 @@ encapsulated file for each file found:
     tools/volucapsulate media/js
 
 
-#### Serving Encapsulates Files
+#### Serving Encapsulated Files
     server:add_route("/style.css",
                      http.dispatch.StaticFile:new("media/css/style.css.lua")
 
