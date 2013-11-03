@@ -9,7 +9,7 @@
 
 vohttp.util = {}
 
---- Escapes a string for transmittion over the HTTP protocol.
+--- Escapes a string for transmission over the HTTP protocol.
 -- @param s the string to escape
 -- @return an escaped string
 function vohttp.util.escape(s)
@@ -44,7 +44,7 @@ function vohttp.util.decode(s)
     return cgi
 end
 
---- Encodes a table of key/values for transmittion over the HTTP protocol.
+--- Encodes a table of key/values for transmission over the HTTP protocol.
 -- @param t the table to encode
 -- @return a string-encoded key-value table
 function vohttp.util.encode(t)
