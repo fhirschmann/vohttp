@@ -3,7 +3,7 @@
 volucapsulate - Encapsulates static files in LUA in order to be used
                 within the vohttp framework.
 
-.. moduleauthor:: Fabian Hirschmann <fabian@hirschm.net>
+.. moduleauthor:: Fabian Hirschmann <fabian@hirschmann.email>
 """
 from __future__ import print_function
 import os

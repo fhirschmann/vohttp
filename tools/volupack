@@ -39,7 +39,7 @@ The library can now be used by plugins like so:
     print(mylib.bar.FOO)
 
 
-.. moduleauthor:: Fabian Hirschmann <fabian@hirschm.net>
+.. moduleauthor:: Fabian Hirschmann <fabian@hirschmann.email>
 """
 from __future__ import print_function
 import re
